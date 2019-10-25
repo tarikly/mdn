@@ -14,7 +14,7 @@ def index(request):
 
     num_books_filtered = Book.objects.filter(title__icontains='cosmos').count
     
-    num_genres_filtered = Book.objects.filter(genre__icontains='science').count
+    num_genres_filtered = Genre.objects.filter(name__icontains='science').count
 
     context = {
             'num_books': num_books,
