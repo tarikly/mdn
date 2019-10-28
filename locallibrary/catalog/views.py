@@ -43,6 +43,24 @@ class BookListView(generic.ListView):
         context['some_data'] = 'This is just some data'
         return context
 
+class BookFilterByYearListView(generic.ListView):
+    model = BookInstance
+
+    def get_queryset(self):
+        return BookInstance.objects.filter(imprint__icontains=self.kwargs['pub_year'])
+
+class BookFilterByYearMonthListView(generic.ListView):
+    model = BookInstance
+
+    def get_queryset(self):
+        return BookInstance.objects.filter(imprint__icontains=self.kwargs['pub_year']).filter(imprint__icontains=self.kwargs['pub_month'])
+
+class BookFilterByYearMonthDayListView(generic.ListView):
+    model = BookInstance
+
+    def get_queryset(self):
+        return BookInstance.objects.filter(imprint__icontains=self.kwargs['pub_year']).filter(imprint__icontains=self.kwargs['pub_month']).filter(imprint__icontains=self.kwargs['pub_day'])
+
 class BookDetailView(generic.DetailView):
     model = Book
 
